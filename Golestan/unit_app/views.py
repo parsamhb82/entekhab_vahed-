@@ -1,3 +1,7 @@
-from django.shortcuts import rende
+from django.shortcuts import render
+from .forms import LessonForm
+from .models import Lesson
 
-# Create your views here.
+def lessonlist(request):
+    lessons = Lesson.objects.all()
+    return render(request, 'lesson_list.html', {'lessons': lessons})
