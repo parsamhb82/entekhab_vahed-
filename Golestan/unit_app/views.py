@@ -43,7 +43,21 @@ def delete_lesson(request, pk):
     return redirect('lesson_list')
 
 
+
 def student_lessons(request, student_id):
     student = get_object_or_404(Student, pk=student_id)
     lessons = Lesson.objects.filter(students=student)
     return render(request, 'student_lessons.html', {'lessons': lessons})
+
+def add_lesson_to_student(request, pk):
+    student = request.user.student
+    lesson = get_object_or_404(Lesson, pk=pk)
+    student.lessons.add(lesson)
+    return redirect('lesson_list')
+
+def delete_lesson_from_student(request, pk):
+    student = request.user.student
+    lesson = get_object_or_404(Lesson, pk=pk)
+    student.lessons.remove(lesson)
+    return redirect('lesson_list')
+
