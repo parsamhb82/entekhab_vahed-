@@ -1,9 +1,16 @@
+
+from django.shortcuts import render
+from .forms import LessonForm
+from .models import Lesson
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 
-from .models import Lesson
-from .forms import LessonForm
+def lessonlist(request):
+    lessons = Lesson.objects.all()
+    return render(request, 'lesson_list.html', {'lessons': lessons})
+
+
 
 @login_required
 def create_lesson(request):
