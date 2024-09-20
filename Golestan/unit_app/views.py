@@ -5,6 +5,7 @@ from .models import Lesson
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+from user_app.models import Student
 
 def lessonlist(request):
     lessons = Lesson.objects.all()
@@ -41,3 +42,8 @@ def delete_lesson(request, pk):
     lesson.delete()
     return redirect('lesson_list')
 
+
+def student_lessons(request, student_id):
+    student = get_object_or_404(Student, pk=student_id)
+    lessons = Lesson.objects.filter(students=student)
+    return render(request, 'student_lessons.html', {'lessons': lessons})
