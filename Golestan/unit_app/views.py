@@ -41,3 +41,15 @@ def delete_lesson(request, pk):
     lesson.delete()
     return redirect('lesson_list')
 
+def add_lesson_to_student(request, pk):
+    student = request.user.student
+    lesson = get_object_or_404(Lesson, pk=pk)
+    student.lessons.add(lesson)
+    return redirect('lesson_list')
+
+def delete_lesson_from_student(request, pk):
+    student = request.user.student
+    lesson = get_object_or_404(Lesson, pk=pk)
+    student.lessons.remove(lesson)
+    return redirect('lesson_list')
+
