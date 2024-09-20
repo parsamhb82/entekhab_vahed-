@@ -5,4 +5,5 @@ from .models import *
 class LessonForm(forms.ModelForm):
     class Meta:
         model = Lesson
-        fields = '__all__'
+        fields = ['unit', 'name', 'capacity', 'class_day', 'major', 'start_time', 'end_time']
+
